@@ -1,2 +1,0 @@
-# Module prof.prodageo.org.MyAppWidgetset
-# RPC service class, partial path of RPC policy file

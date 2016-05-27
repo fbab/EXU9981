@@ -29,16 +29,32 @@ public class DbWrapper {
 
                 if ( not_started )
                 {
+		    // String runscript = "INIT = runscript from 'ddl.sql'\\;runscript from 'dml.sql'" ;
+		    String runscript_ddl = "runscript from '/tmp/EXU9981/target/classes/ddl.sql'" ; // OK
+		    String runscript_dml = "runscript from '/tmp/EXU9981/target/classes/dml.sql'" ; // OK
+
+
+		  // String runscript_all = "INIT=" + runscript_ddl + "\\;" + runscript_dml ; // KO
+		  String runscript_all = "INIT=" + runscript_ddl + ";" ; // OK
+		    // runscript = "INIT=runscript from '/tmp/EXU9981/target/classes/ddl.sql'" ; // OK
+		    // runscript = "INIT=runscript from 'ddl.sql'" ; // KO
+		    // runscript = "CREATE TABLE TEST(ID INT, NAME VARCHAR)" ;
+
+		    String URL = "jdbc:h2:mem:" + DBNAME + ";" + runscript_all  ;
+		    // URL = "jdbc:h2:mem:" + DBNAME ;
+
                     Class.forName("org.h2.Driver"); // (1)
                     conn 
-                        = DriverManager.getConnection("jdbc:h2:mem:" + DBNAME + "runscript from 'ddl.sql'\\;runscript from 'dml.sql'", "sa", ""); // (2)
+                        = DriverManager.getConnection( URL , "sa", ""); // (2)
                     // username:password are very important and must be used for connecting via H2 Console
+
+                    log.info("CONNECTION OK !");
 
                     Statement stat = conn.createStatement(); // (3)
 
-                    stat.executeUpdate("DROP table INIT(id int primary key, name varchar(255))");
+                    // stat.executeUpdate("DROP table INIT(id int primary key, name varchar(255))");
                     log.info("INIT dropped !");
-                    stat.executeUpdate("create table INIT(id int primary key, name varchar(255))");
+                    // stat.executeUpdate("create table INIT(id int primary key, name varchar(255))");
 /*
                     stat.executeUpdate("create table mytbl(id int primary key, name varchar(255))");
                     stat.executeUpdate("insert into mytbl values(1, 'Hello')");
@@ -46,13 +62,14 @@ public class DbWrapper {
 */
                 }
 
+/*
                 Statement stat1 = conn.createStatement(); // (3)
-                // Verify that sample data was really inserted
+                 Verify that sample data was really inserted
                 ResultSet rs = stat1.executeQuery("select * from mytbl");
                 log.info("ResultSet output:");
                 while (rs.next()) {
-                    log.info(rs.getString("name"));
-                } 
+                    log.info(rs.getString("name"));              } a
+*/
             // finally { log.info("DB mem initiated !");
             } catch (final ClassNotFoundException e) {
                 log.info("ClassNotFoundException !");

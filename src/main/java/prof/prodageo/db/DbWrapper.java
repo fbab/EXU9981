@@ -31,13 +31,19 @@ public class DbWrapper {
                 {
                     Class.forName("org.h2.Driver"); // (1)
                     conn 
-                        = DriverManager.getConnection("jdbc:h2:mem:" + DBNAME, "sa", ""); // (2)
+                        = DriverManager.getConnection("jdbc:h2:mem:" + DBNAME + "runscript from 'ddl.sql'\\;runscript from 'dml.sql'", "sa", ""); // (2)
                     // username:password are very important and must be used for connecting via H2 Console
 
                     Statement stat = conn.createStatement(); // (3)
+
+                    stat.executeUpdate("DROP table INIT(id int primary key, name varchar(255))");
+                    log.info("INIT dropped !");
+                    stat.executeUpdate("create table INIT(id int primary key, name varchar(255))");
+/*
                     stat.executeUpdate("create table mytbl(id int primary key, name varchar(255))");
                     stat.executeUpdate("insert into mytbl values(1, 'Hello')");
                     stat.executeUpdate("insert into mytbl values(2, 'World')");
+*/
                 }
 
                 Statement stat1 = conn.createStatement(); // (3)

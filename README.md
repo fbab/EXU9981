@@ -3,10 +3,12 @@ EXU9981A
 
 Introduction
 ===
-This project allows to load a SQL file stored in :
+This project allows to load at application startup (mvn jetty:run) a SQL file stored in :
 * src/main/resources/ddl.sql
 
 ddl.sql can store CREATE TABLE (DDL) and INSERT (DML) instructions. 
+
+The db can be browsed with H2 console available on 8082 port.
 
 Procedure
 ===

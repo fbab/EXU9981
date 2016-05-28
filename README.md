@@ -17,8 +17,8 @@ Procedure
 * > cd /tmp/EXU9981
 * > mvn install
 * > mvn jetty:run
-* > browser> locahost:8080
+* > browser> localhost:8080
 => display Vaadin application
-* > browser> locahost:8082
+* > browser> localhost:8082
 => display H2 console
 

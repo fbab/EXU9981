@@ -1,11 +1,15 @@
 EXU9981A
 ==============
+
+Introduction
+===
 This project allows to load a SQL file stored in :
 * src/main/resources/ddl.sql
 
 ddl.sql can store CREATE TABLE (DDL) and INSERT (DML) instructions. 
 
-
+Procedure
+===
 * > cd /tmp
 * > git clone https://github.com/fbab/EXU9981
 * > cd /tmp/EXU9981
